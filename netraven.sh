@@ -81,52 +81,19 @@ show_status_bar() {
 # ==================== BUILD FUNCTIONS ====================
 
 auto_build_engine() {
-    if [ ! -f "src/engine/netraven_engine" ]; then
+    local need_build=0
+    local engine_src="src/engine/netraven_engine.cpp"
+    local engine_bin="src/engine/netraven_engine"
+
+    if [ ! -f "$engine_bin" ]; then
+        need_build=1
+    elif [ -f "$engine_src" ] && [ "$engine_src" -nt "$engine_bin" ]; then
+        need_build=1
+    fi
+
+    if [ $need_build -eq 1 ]; then
         echo -e "${CYAN}[*] Building C++ Engine...${NC}"
-        
-        # Step 1: apt update
-        echo -e "${YELLOW}[*] Updating package repositories...${NC}"
-        sudo apt update -qq 2>/dev/null || true
-        echo -e "${GREEN}[+] Package repositories updated${NC}"
-        
-        # Step 2: Install build dependencies
-        echo -e "${YELLOW}[*] Installing build dependencies...${NC}"
-        
-        local deps=("g++" "make" "libcurl4-openssl-dev")
-        for dep in "${deps[@]}"; do
-            if ! dpkg -s "$dep" &>/dev/null; then
-                echo -e "${CYAN}[*] Installing $dep...${NC}"
-                sudo apt install -y "$dep" 2>&1 | tail -n 3
-            else
-                echo -e "${GREEN}[+] $dep already installed${NC}"
-            fi
-        done
-        
-        # Fallback for libcurl
-        if ! dpkg -s libcurl4-openssl-dev &>/dev/null; then
-            echo -e "${YELLOW}[!] libcurl4-openssl-dev not available, trying libcurl-dev...${NC}"
-            sudo apt install -y libcurl-dev 2>&1 | tail -n 3
-        fi
-        
-        # Step 3: Compile engine
-        echo -e "${CYAN}[*] Compiling C++ Engine...${NC}"
-        cd src/engine
-        rm -f netraven_engine
-        make clean 2>/dev/null || true
-        
-        # Run make in background with spinner
-        make > /tmp/compile.log 2>&1 &
-        local pid=$!
-        spinner $pid
-        wait $pid
-        
-        cd ../..
-        
-        if [ -f "src/engine/netraven_engine" ]; then
-            echo -e "${GREEN}[+] Engine ready${NC}"
-        else
-            echo -e "${YELLOW}[!] Engine build failed, using bash mode${NC}"
-        fi
+        bash build.sh
     else
         echo -e "${GREEN}[+] Engine already built${NC}"
     fi
@@ -161,14 +128,14 @@ prompt_target() {
 }
 
 show_main_menu() {
-    echo -e "${PURPLE}┌──────────────────────────────────────────┐${NC}"
-    echo -e "${PURPLE}│${NC}          ${CYAN}NetRaven Main Menu${NC}              ${PURPLE}│${NC}"
-    echo -e "${PURPLE}├──────────────────────────────────────────┤${NC}"
-    echo -e "${PURPLE}│${NC} ${CYAN}[1]${NC}  Hack                              ${PURPLE}│${NC}"
-    echo -e "${PURPLE}│${NC} ${CYAN}[2]${NC}  Help                              ${PURPLE}│${NC}"
-    echo -e "${PURPLE}│${NC} ${CYAN}[3]${NC}  Mishvious                         ${PURPLE}│${NC}"
-    echo -e "${PURPLE}│${NC} ${CYAN}[0]${NC}  Exit                              ${PURPLE}│${NC}"
-    echo -e "${PURPLE}└──────────────────────────────────────────┘${NC}"
+    echo -e "${PURPLE}┌──────────────────────────────────────────────────┐${NC}"
+    echo -e "${PURPLE}│${NC}          ${CYAN}NetRaven Main Menu${NC}                       ${PURPLE}│${NC}"
+    echo -e "${PURPLE}├──────────────────────────────────────────────────┤${NC}"
+    echo -e "${PURPLE}│${NC} ${CYAN}[1]${NC}  Hack                                      ${PURPLE}│${NC}"
+    echo -e "${PURPLE}│${NC} ${CYAN}[2]${NC}  Help                                      ${PURPLE}│${NC}"
+    echo -e "${PURPLE}│${NC} ${CYAN}[3]${NC}  Mishvious                                 ${PURPLE}│${NC}"
+    echo -e "${PURPLE}│${NC} ${CYAN}[0]${NC}  Exit                                      ${PURPLE}│${NC}"
+    echo -e "${PURPLE}└──────────────────────────────────────────────────┘${NC}"
     echo
 }
 

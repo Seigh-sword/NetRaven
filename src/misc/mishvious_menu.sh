@@ -101,14 +101,19 @@ update_netraven() {
     echo -e "${YELLOW}[*] Changes:${NC}"
     git log --oneline @{u}..HEAD 2>/dev/null || git log --oneline -5
     
+    # Detect current branch
+    BRANCH=$(git rev-parse --abbrev-ref @ 2>/dev/null || echo "main")
+    
     read -p "Update now? (yes/no): " confirm
     if [ "$confirm" = "yes" ]; then
-        echo -e "${CYAN}[*] Updating NetRaven...${NC}"
-        git pull origin main 2>&1 | tail -n 10
+        echo -e "${CYAN}[*] Updating NetRaven (branch: $BRANCH)...${NC}"
+        git pull origin "$BRANCH" 2>&1 | tail -n 10
         
         if [ $? -eq 0 ]; then
             echo -e "${GREEN}[+] Update successful!${NC}"
-            echo -e "${YELLOW}[!] Restart NetRaven to use new version${NC}"
+            echo -e "${YELLOW}[*] Rebuilding engine with new code...${NC}"
+            bash build.sh
+            echo -e "${GREEN}[+] Rebuild complete${NC}"
         else
             echo -e "${RED}[-] Update failed${NC}"
         fi
@@ -120,28 +125,28 @@ update_netraven() {
 mishvious_menu() {
     while true; do
         clear
-        echo -e "${PURPLE}┌──────────────────────────────────────────┐${NC}"
-        echo -e "${PURPLE}│${NC}          ${CYAN}Mishvious Modules${NC}              ${PURPLE}│${NC}"
-        echo -e "${PURPLE}├──────────────────────────────────────────┤${NC}"
-        echo -e "${PURPLE}│${NC} ${CYAN}[1]${NC}  C++ Engine                        ${PURPLE}│${NC}"
-        echo -e "${PURPLE}│${NC} ${CYAN}[2]${NC}  Cloudflare Tunnels                ${PURPLE}│${NC}"
-        echo -e "${PURPLE}│${NC} ${CYAN}[3]${NC}  Plugin Manager                    ${PURPLE}│${NC}"
-        echo -e "${PURPLE}│${NC} ${CYAN}[4]${NC}  Vulnerable Site Generator          ${PURPLE}│${NC}"
-        echo -e "${PURPLE}│${NC} ${CYAN}[5]${NC}  Text-to-Speech (TTS)              ${PURPLE}│${NC}"
-        echo -e "${PURPLE}│${NC} ${CYAN}[6]${NC}  Documentation Viewer              ${PURPLE}│${NC}"
-        echo -e "${PURPLE}│${NC} ${CYAN}[7]${NC}  License                           ${PURPLE}│${NC}"
-        echo -e "${PURPLE}│${NC} ${CYAN}[8]${NC}  Terms of Use                      ${PURPLE}│${NC}"
-        echo -e "${PURPLE}│${NC} ${CYAN}[9]${NC}  Environment Information            ${PURPLE}│${NC}"
-        echo -e "${PURPLE}│${NC} ${CYAN}[10]${NC} Update NetRaven                     ${PURPLE}│${NC}"
-        echo -e "${PURPLE}│${NC} ${CYAN}[0]${NC}  Back to Main Menu                 ${PURPLE}│${NC}"
-        echo -e "${PURPLE}└──────────────────────────────────────────┘${NC}"
+        echo -e "${PURPLE}┌──────────────────────────────────────────────────┐${NC}"
+        echo -e "${PURPLE}│${NC}          ${CYAN}Mishvious Modules${NC}                       ${PURPLE}│${NC}"
+        echo -e "${PURPLE}├──────────────────────────────────────────────────┤${NC}"
+        echo -e "${PURPLE}│${NC} ${CYAN}[1]${NC}  C++ Engine                                ${PURPLE}│${NC}"
+        echo -e "${PURPLE}│${NC} ${CYAN}[2]${NC}  Cloudflare Tunnels                        ${PURPLE}│${NC}"
+        echo -e "${PURPLE}│${NC} ${CYAN}[3]${NC}  Plugins                                   ${PURPLE}│${NC}"
+        echo -e "${PURPLE}│${NC} ${CYAN}[4]${NC}  Vulnerable Site Generator                  ${PURPLE}│${NC}"
+        echo -e "${PURPLE}│${NC} ${CYAN}[5]${NC}  Text-to-Speech (TTS)                      ${PURPLE}│${NC}"
+        echo -e "${PURPLE}│${NC} ${CYAN}[6]${NC}  Documentation Viewer                      ${PURPLE}│${NC}"
+        echo -e "${PURPLE}│${NC} ${CYAN}[7]${NC}  License                                   ${PURPLE}│${NC}"
+        echo -e "${PURPLE}│${NC} ${CYAN}[8]${NC}  Terms of Use                              ${PURPLE}│${NC}"
+        echo -e "${PURPLE}│${NC} ${CYAN}[9]${NC}  Environment Information                   ${PURPLE}│${NC}"
+        echo -e "${PURPLE}│${NC} ${CYAN}[10]${NC} Update NetRaven                            ${PURPLE}│${NC}"
+        echo -e "${PURPLE}│${NC} ${CYAN}[0]${NC}  Back to Main Menu                         ${PURPLE}│${NC}"
+        echo -e "${PURPLE}└──────────────────────────────────────────────────┘${NC}"
         echo
         read -p "Select module: " opt
 
         case $opt in
             1) source src/engine/engine_menu.sh ;;
             2) source src/tunnels/tunnel_manager.sh ;;
-            3) source src/core/plugin_loader.sh ;;
+            3) source src/core/plugin_packager.sh ;;
             4) source src/sites/site_generator.sh ;;
             5) source src/misc/tts.sh ;;
             6) view_docs ;;

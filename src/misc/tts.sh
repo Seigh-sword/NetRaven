@@ -135,16 +135,16 @@ tts_menu() {
     check_tts_deps || return
     while true; do
         clear
-        echo -e "${PURPLE}┌──────────────────────────────────────────┐${NC}"
-        echo -e "${PURPLE}│${NC}          ${CYAN}Text-to-Speech${NC}                 ${PURPLE}│${NC}"
-        echo -e "${PURPLE}├──────────────────────────────────────────┤${NC}"
-        echo -e "${PURPLE}│${NC} ${CYAN}[1]${NC}  TTS from Text                    ${PURPLE}│${NC}"
-        echo -e "${PURPLE}│${NC} ${CYAN}[2]${NC}  TTS from File                    ${PURPLE}│${NC}"
-        echo -e "${PURPLE}│${NC} ${CYAN}[3]${NC}  List MP3s                        ${PURPLE}│${NC}"
-        echo -e "${PURPLE}│${NC} ${CYAN}[4]${NC}  Play MP3                         ${PURPLE}│${NC}"
-        echo -e "${PURPLE}│${NC} ${CYAN}[5]${NC}  Delete MP3                       ${PURPLE}│${NC}"
-        echo -e "${PURPLE}│${NC} ${CYAN}[0]${NC}  Back to Main Menu                ${PURPLE}│${NC}"
-        echo -e "${PURPLE}└──────────────────────────────────────────┘${NC}"
+        echo -e "${PURPLE}┌──────────────────────────────────────────────────┐${NC}"
+        echo -e "${PURPLE}│${NC}          ${CYAN}Text-to-Speech${NC}                       ${PURPLE}│${NC}"
+        echo -e "${PURPLE}├──────────────────────────────────────────────────┤${NC}"
+        echo -e "${PURPLE}│${NC} ${CYAN}[1]${NC}  TTS from Text                        ${PURPLE}│${NC}"
+        echo -e "${PURPLE}│${NC} ${CYAN}[2]${NC}  TTS from File                        ${PURPLE}│${NC}"
+        echo -e "${PURPLE}│${NC} ${CYAN}[3]${NC}  List MP3s                            ${PURPLE}│${NC}"
+        echo -e "${PURPLE}│${NC} ${CYAN}[4]${NC}  Play MP3                             ${PURPLE}│${NC}"
+        echo -e "${PURPLE}│${NC} ${CYAN}[5]${NC}  Delete MP3                           ${PURPLE}│${NC}"
+        echo -e "${PURPLE}│${NC} ${CYAN}[0]${NC}  Back to Main Menu                    ${PURPLE}│${NC}"
+        echo -e "${PURPLE}└──────────────────────────────────────────────────┘${NC}"
         echo
         read -p "Select option: " opt
         case $opt in

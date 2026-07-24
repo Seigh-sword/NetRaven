@@ -15,19 +15,19 @@ PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 help_menu() {
     while true; do
         clear
-        echo -e "${PURPLE}┌──────────────────────────────────────────┐${NC}"
-        echo -e "${PURPLE}│${NC}          ${CYAN}Help & Documentation${NC}           ${PURPLE}│${NC}"
-        echo -e "${PURPLE}├──────────────────────────────────────────┤${NC}"
-        echo -e "${PURPLE}│${NC} ${CYAN}[1]${NC}  Quick Start Guide                 ${PURPLE}│${NC}"
-        echo -e "${PURPLE}│${NC} ${CYAN}[2]${NC}  Attack Explanations               ${PURPLE}│${NC}"
-        echo -e "${PURPLE}│${NC} ${CYAN}[3]${NC}  Tool Reference                    ${PURPLE}│${NC}"
-        echo -e "${PURPLE}│${NC} ${CYAN}[4]${NC}  Plugin Development Guide          ${PURPLE}│${NC}"
-        echo -e "${PURPLE}│${NC} ${CYAN}[5]${NC}  Cloudflare Tunnels Guide          ${PURPLE}│${NC}"
-        echo -e "${PURPLE}│${NC} ${CYAN}[6]${NC}  Troubleshooting                   ${PURPLE}│${NC}"
-        echo -e "${PURPLE}│${NC} ${CYAN}[7]${NC}  FAQ                               ${PURPLE}│${NC}"
-        echo -e "${PURPLE}│${NC} ${CYAN}[8]${NC}  View Documentation                ${PURPLE}│${NC}"
-        echo -e "${PURPLE}│${NC} ${CYAN}[0]${NC}  Back to Main Menu                 ${PURPLE}│${NC}"
-        echo -e "${PURPLE}└──────────────────────────────────────────┘${NC}"
+        echo -e "${PURPLE}┌──────────────────────────────────────────────────┐${NC}"
+        echo -e "${PURPLE}│${NC}          ${CYAN}Help & Documentation${NC}                   ${PURPLE}│${NC}"
+        echo -e "${PURPLE}├──────────────────────────────────────────────────┤${NC}"
+        echo -e "${PURPLE}│${NC} ${CYAN}[1]${NC}  Quick Start Guide                     ${PURPLE}│${NC}"
+        echo -e "${PURPLE}│${NC} ${CYAN}[2]${NC}  Attack Explanations                   ${PURPLE}│${NC}"
+        echo -e "${PURPLE}│${NC} ${CYAN}[3]${NC}  Tool Reference                        ${PURPLE}│${NC}"
+        echo -e "${PURPLE}│${NC} ${CYAN}[4]${NC}  Plugin Development Guide              ${PURPLE}│${NC}"
+        echo -e "${PURPLE}│${NC} ${CYAN}[5]${NC}  Cloudflare Tunnels Guide              ${PURPLE}│${NC}"
+        echo -e "${PURPLE}│${NC} ${CYAN}[6]${NC}  Troubleshooting                       ${PURPLE}│${NC}"
+        echo -e "${PURPLE}│${NC} ${CYAN}[7]${NC}  FAQ                                   ${PURPLE}│${NC}"
+        echo -e "${PURPLE}│${NC} ${CYAN}[8]${NC}  View Documentation                    ${PURPLE}│${NC}"
+        echo -e "${PURPLE}│${NC} ${CYAN}[0]${NC}  Back to Main Menu                     ${PURPLE}│${NC}"
+        echo -e "${PURPLE}└──────────────────────────────────────────────────┘${NC}"
         echo
         read -p "Select topic: " opt
 

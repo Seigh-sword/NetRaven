@@ -14,18 +14,18 @@ NC='\033[0m'
 hack_menu() {
     while true; do
         clear
-        echo -e "${PURPLE}┌──────────────────────────────────────────┐${NC}"
-        echo -e "${PURPLE}│${NC}          ${CYAN}Hack Modules${NC}                   ${PURPLE}│${NC}"
-        echo -e "${PURPLE}├──────────────────────────────────────────┤${NC}"
-        echo -e "${PURPLE}│${NC} ${CYAN}[1]${NC}  Reconnaissance & Info Gathering     ${PURPLE}│${NC}"
-        echo -e "${PURPLE}│${NC} ${CYAN}[2]${NC}  Vulnerability Scanning             ${PURPLE}│${NC}"
-        echo -e "${PURPLE}│${NC} ${CYAN}[3]${NC}  Attack Modules                     ${PURPLE}│${NC}"
-        echo -e "${PURPLE}│${NC} ${CYAN}[4]${NC}  Monitoring & Analysis              ${PURPLE}│${NC}"
-        echo -e "${PURPLE}│${NC} ${CYAN}[5]${NC}  Network Utilities                  ${PURPLE}│${NC}"
-        echo -e "${PURPLE}│${NC} ${CYAN}[6]${NC}  Reports                            ${PURPLE}│${NC}"
-        echo -e "${PURPLE}│${NC} ${CYAN}[7]${NC}  Exploitation                       ${PURPLE}│${NC}"
-        echo -e "${PURPLE}│${NC} ${CYAN}[0]${NC}  Back to Main Menu                  ${PURPLE}│${NC}"
-        echo -e "${PURPLE}└──────────────────────────────────────────┘${NC}"
+        echo -e "${PURPLE}┌──────────────────────────────────────────────────┐${NC}"
+        echo -e "${PURPLE}│${NC}          ${CYAN}Hack Modules${NC}                           ${PURPLE}│${NC}"
+        echo -e "${PURPLE}├──────────────────────────────────────────────────┤${NC}"
+        echo -e "${PURPLE}│${NC} ${CYAN}[1]${NC}  Reconnaissance & Info Gathering         ${PURPLE}│${NC}"
+        echo -e "${PURPLE}│${NC} ${CYAN}[2]${NC}  Vulnerability Scanning                 ${PURPLE}│${NC}"
+        echo -e "${PURPLE}│${NC} ${CYAN}[3]${NC}  Attack Modules                         ${PURPLE}│${NC}"
+        echo -e "${PURPLE}│${NC} ${CYAN}[4]${NC}  Monitoring & Analysis                  ${PURPLE}│${NC}"
+        echo -e "${PURPLE}│${NC} ${CYAN}[5]${NC}  Network Utilities                      ${PURPLE}│${NC}"
+        echo -e "${PURPLE}│${NC} ${CYAN}[6]${NC}  Reports                                ${PURPLE}│${NC}"
+        echo -e "${PURPLE}│${NC} ${CYAN}[7]${NC}  Exploitation                           ${PURPLE}│${NC}"
+        echo -e "${PURPLE}│${NC} ${CYAN}[0]${NC}  Back to Main Menu                      ${PURPLE}│${NC}"
+        echo -e "${PURPLE}└──────────────────────────────────────────────────┘${NC}"
         echo
         read -p "Select module: " opt
 
