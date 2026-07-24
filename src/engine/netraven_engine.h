@@ -32,7 +32,7 @@ struct PluginInfo {
     std::string version;
     std::string author;
     std::string category;
-    std::vector<std::string> requires;
+    std::vector<std::string> requires_;
     std::string description;
     std::string xml_content;
 };

@@ -14,6 +14,7 @@
 #include <unistd.h>
 #include <sys/utsname.h>
 #include <sys/sysinfo.h>
+#include <sys/statvfs.h>
 #include <dirent.h>
 #endif
 
@@ -87,8 +88,8 @@ namespace netraven {
         std::string req_block;
         if (std::regex_search(content, match, re_req)) {
             req_block = match[1];
-            info.requires = split(req_block, ',');
-            for (auto& r : info.requires) {
+            info.requires_ = split(req_block, ',');
+            for (auto& r : info.requires_) {
                 r.erase(0, r.find_first_not_of(" \t\n\r"));
                 r.erase(r.find_last_not_of(" \t\n\r") + 1);
             }
@@ -116,8 +117,8 @@ namespace netraven {
             else if (key == "category") info.category = value;
             else if (key == "description") info.description = value;
             else if (key == "requires") {
-                info.requires = split(value, ',');
-                for (auto& r : info.requires) {
+                info.requires_ = split(value, ',');
+                for (auto& r : info.requires_) {
                     r.erase(0, r.find_first_not_of(" \t\n\r"));
                     r.erase(r.find_last_not_of(" \t\n\r") + 1);
                 }
@@ -630,11 +631,11 @@ namespace netraven {
 
 #ifdef __linux__
     bool NetRavenEngine::create_tunnel(const std::string& local_port, std::string& public_url) {
-        std::string cmd = "cloudflared tunnel --url http://localhost:" + local_port + " > " + base_work_dir_ + "/tunnels/tunnel_" + std::to_string(active_tunnels_) + ".log 2>&1 &";
+        std::string cmd = "cloudflared tunnel --url http://localhost:" + local_port + " > " + base_work_dir_ + "/tunnels/tunnel_" + std::to_string(active_tunnels_.size()) + ".log 2>&1 &";
         system(cmd.c_str());
         sleep(3);
 
-        std::string log_file = base_work_dir_ + "/tunnels/tunnel_" + std::to_string(active_tunnels_) + ".log";
+        std::string log_file = base_work_dir_ + "/tunnels/tunnel_" + std::to_string(active_tunnels_.size()) + ".log";
         std::ifstream log(log_file);
         if (log.is_open()) {
             std::string line;
@@ -672,12 +673,12 @@ namespace netraven {
         env.working_directory = base_work_dir_;
 
 #ifdef __linux__
-        struct utsname sysinfo;
-        if (uname(&sysinfo) == 0) {
-            env.os_version = std::string(sysinfo.sysname) + " " + std::string(sysinfo.release);
-            env.kernel_version = sysinfo.release;
-            env.arch = sysinfo.machine;
-            env.hostname = sysinfo.nodename;
+        struct utsname sys_info;
+        if (uname(&sys_info) == 0) {
+            env.os_version = std::string(sys_info.sysname) + " " + std::string(sys_info.release);
+            env.kernel_version = sys_info.release;
+            env.arch = sys_info.machine;
+            env.hostname = sys_info.nodename;
         }
 
         env.username = std::string(getenv("USER") ? getenv("USER") : "unknown");
