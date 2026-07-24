@@ -1,0 +1,6 @@
+name=Brute Force Tester
+version=1.0
+author=NetRaven
+category=bruteforce
+description=Tests for weak credentials via brute force
+requires=hydra

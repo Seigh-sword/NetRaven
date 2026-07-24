@@ -1,0 +1,44 @@
+NetRaven Terms of Use
+
+By cloning, downloading, or using this repository, you agree to the following terms:
+
+1. DIGITAL COPY OWNERSHIP
+   When you clone or download this repository, you obtain a digital copy of the
+   codebase as it exists at the time of cloning. You own that specific copy on
+   your local machine and may use, modify, and run it for your own purposes.
+
+2. SCOPE OF MODIFICATIONS
+   Any modifications, changes, or derivatives you create from your cloned copy
+   apply solely to your local copy. You are free to experiment, learn, and
+   adapt the code for personal educational use.
+
+3. DISTRIBUTION
+   If you wish to distribute modified versions of this software, you must
+   comply with the terms of the Apache License 2.0 under which this project
+   is released. This includes providing proper attribution and including a
+   copy of the license.
+
+4. AUTHORIZED TESTING ONLY
+   This software is designed for security research and authorized penetration
+   testing. You may only use this tool on systems you own or have explicit
+   written permission to test. Unauthorized access to computer systems is
+   illegal and unethical.
+
+5. NO WARRANTY
+   This software is provided "as is" without warranty of any kind. The authors
+   are not responsible for any misuse, damage, or legal consequences arising
+   from the use of this tool.
+
+6. RESPONSIBILITY
+   You are solely responsible for your actions. Any attacks, scans, or tests
+   performed using this tool are your responsibility. Always obtain proper
+   authorization before testing any system.
+
+7. EDUCATIONAL PURPOSE
+   This tool is intended for educational purposes and authorized security
+   assessments only. Use it responsibly and legally.
+
+8. CLONING
+   Cloning this repository creates your own local version. The original
+   repository remains the property of its maintainers. Your cloned version
+   is your own digital copy, subject to the license terms above.

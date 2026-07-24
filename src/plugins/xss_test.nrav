@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+    <name>XSS Payload Tester</name>
+    <version>1.0</version>
+    <author>NetRaven</author>
+    <description>Tests for Cross-Site Scripting vulnerabilities</description>
+    <category>xss</category>
+    <requires>curl</requires>
+    <attack type="xss">
+        <payload><script>alert(1)</script></payload>
+        <payload><img src=x onerror=alert(1)></payload>
+        <payload><svg onload=alert(1)></payload>
+        <detection>script|alert|onerror|onload</detection>
+    </attack>
+</plugin>

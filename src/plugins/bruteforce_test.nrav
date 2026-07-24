@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+    <name>Brute Force Tester</name>
+    <version>1.0</version>
+    <author>NetRaven</author>
+    <description>Tests for weak credentials via brute force</description>
+    <category>bruteforce</category>
+    <requires>hydra</requires>
+    <attack type="bruteforce">
+        <payload>wordlist_attack</payload>
+        <detection>login|password|success|valid</detection>
+    </attack>
+</plugin>

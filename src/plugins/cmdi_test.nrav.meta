@@ -1,0 +1,6 @@
+name=Command Injection Tester
+version=1.0
+author=NetRaven
+category=cmdi
+description=Tests for command injection vulnerabilities
+requires=curl

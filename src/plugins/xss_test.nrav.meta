@@ -1,0 +1,6 @@
+name=XSS Payload Tester
+version=1.0
+author=NetRaven
+category=xss
+description=Tests for Cross-Site Scripting vulnerabilities
+requires=curl

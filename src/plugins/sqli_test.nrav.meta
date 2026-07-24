@@ -1,0 +1,6 @@
+name=SQL Injection Tester
+version=1.0
+author=NetRaven
+category=sqli
+description=Tests for SQL injection vulnerabilities in GET parameters
+requires=curl

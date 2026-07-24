@@ -1,0 +1,6 @@
+name=LFI Scanner
+version=1.0
+author=NetRaven
+category=lfi
+description=Tests for Local File Inclusion vulnerabilities
+requires=curl

