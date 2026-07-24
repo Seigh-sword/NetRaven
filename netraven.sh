@@ -36,7 +36,7 @@ spinner() {
 progress_bar() {
     local current=$1
     local total=$2
-    local width=40
+    local width=$WIDTH
     local percentage=$((current * 100 / total))
     local filled=$((width * current / total))
     local empty=$((width - filled))
@@ -141,14 +141,43 @@ show_main_menu() {
 
 # ==================== STARTUP ====================
 show_banner
+
+echo -e "${PURPLE}╔══════════════════════════════════════════════════════╗${NC}"
+echo -e "${PURPLE}║${NC}          ${CYAN}Initializing NetRaven${NC}                    ${PURPLE}║${NC}"
+echo -e "${PURPLE}╚══════════════════════════════════════════════════════╝${NC}"
+echo
+
+start_time=$(date +%s)
+
+echo -ne "${CYAN}[*] Loading core modules...${NC}"
+sleep 0.3
+echo -e " ${GREEN}Done${NC} ${YELLOW}($(($(date +%s) - start_time))s)${NC}"
+
+echo -ne "${CYAN}[*] Checking system compatibility...${NC}"
+sleep 0.2
+echo -e " ${GREEN}Done${NC} ${YELLOW}($(($(date +%s) - start_time))s)${NC}"
+
+echo -ne "${CYAN}[*] Loading configuration...${NC}"
 source src/core/config.sh
 source src/core/utils.sh
-check_tools
+echo -e " ${GREEN}Done${NC} ${YELLOW}($(($(date +%s) - start_time))s)${NC}"
+
+echo -ne "${CYAN}[*] Checking installed tools...${NC}"
+check_tools > /dev/null 2>&1
+echo -e " ${GREEN}Done${NC} ${YELLOW}($(($(date +%s) - start_time))s)${NC}"
+
+echo -ne "${CYAN}[*] Building C++ Engine (if needed)...${NC}"
+echo
 auto_build_engine
+echo -e "${GREEN}[+] Engine step complete${NC} ${YELLOW}($(($(date +%s) - start_time))s)${NC}"
+
+echo -ne "${CYAN}[*] Installing plugins...${NC}"
 auto_install_plugins
+echo -e " ${GREEN}Done${NC} ${YELLOW}($(($(date +%s) - start_time))s)${NC}"
 
 echo
 echo -e "${GREEN}[+] NetRaven initialized successfully${NC}"
+echo -e "${PURPLE}──────────────────────────────────────────────────${NC}"
 sleep 0.5
 
 # ==================== MAIN LOOP ====================

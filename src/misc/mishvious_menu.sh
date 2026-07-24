@@ -111,9 +111,9 @@ update_netraven() {
         
         if [ $? -eq 0 ]; then
             echo -e "${GREEN}[+] Update successful!${NC}"
-            echo -e "${YELLOW}[*] Rebuilding engine with new code...${NC}"
-            bash build.sh
-            echo -e "${GREEN}[+] Rebuild complete${NC}"
+            echo -e "${YELLOW}[*] NetRaven will now close. Restart to auto-build.${NC}"
+            read -p "Press Enter to exit..."
+            exit 0
         else
             echo -e "${RED}[-] Update failed${NC}"
         fi
