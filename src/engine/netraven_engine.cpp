@@ -774,3 +774,157 @@ extern "C" {
         delete engine;
     }
 }
+
+int main(int argc, char* argv[]) {
+    if (argc < 2) {
+        std::cerr << "Usage: netraven_engine <command> [args...]" << std::endl;
+        std::cerr << "Commands: analyze, sqli, xss, cmdi, lfi, bruteforce, open_redirect, csrf, clickjacking, crlf, plugin, report, score" << std::endl;
+        return 1;
+    }
+
+    netraven::NetRavenEngine engine;
+    std::string command = argv[1];
+
+    try {
+        if (command == "analyze" && argc >= 3) {
+            netraven::TargetInfo target = engine.analyze_target(argv[2]);
+            std::cout << "Target: " << target.url << std::endl;
+            std::cout << "Domain: " << target.domain << std::endl;
+            std::cout << "IP: " << target.ip << std::endl;
+            std::cout << "Server: " << target.server;
+            std::cout << "Technologies: " << target.technologies << std::endl;
+            std::cout << "Security Level: " << target.security_level << "/3" << std::endl;
+            std::cout << "WAF Detected: " << (target.has_waf ? "Yes" : "No") << std::endl;
+        }
+        else if (command == "sqli" && argc >= 4) {
+            netraven::TargetInfo target = engine.analyze_target(argv[2]);
+            auto results = engine.simulate_sqli(target, argv[2], argv[3]);
+            for (const auto& r : results) {
+                std::cout << "[" << (r.success ? "VULNERABLE" : "SAFE") << "] " << r.attack_type << std::endl;
+                std::cout << "  Payload: " << r.payload_used << std::endl;
+                std::cout << "  Confidence: " << r.confidence << "%" << std::endl;
+                std::cout << "  Evidence: " << r.evidence << std::endl;
+                std::cout << "  Recommendation: " << r.recommendation << std::endl;
+            }
+        }
+        else if (command == "xss" && argc >= 4) {
+            netraven::TargetInfo target = engine.analyze_target(argv[2]);
+            auto results = engine.simulate_xss(target, argv[2], argv[3]);
+            for (const auto& r : results) {
+                std::cout << "[" << (r.success ? "VULNERABLE" : "SAFE") << "] " << r.attack_type << std::endl;
+                std::cout << "  Payload: " << r.payload_used << std::endl;
+                std::cout << "  Confidence: " << r.confidence << "%" << std::endl;
+                std::cout << "  Evidence: " << r.evidence << std::endl;
+                std::cout << "  Recommendation: " << r.recommendation << std::endl;
+            }
+        }
+        else if (command == "cmdi" && argc >= 4) {
+            netraven::TargetInfo target = engine.analyze_target(argv[2]);
+            auto results = engine.simulate_cmdi(target, argv[2], argv[3]);
+            for (const auto& r : results) {
+                std::cout << "[" << (r.success ? "VULNERABLE" : "SAFE") << "] " << r.attack_type << std::endl;
+                std::cout << "  Payload: " << r.payload_used << std::endl;
+                std::cout << "  Confidence: " << r.confidence << "%" << std::endl;
+                std::cout << "  Evidence: " << r.evidence << std::endl;
+                std::cout << "  Recommendation: " << r.recommendation << std::endl;
+            }
+        }
+        else if (command == "lfi" && argc >= 4) {
+            netraven::TargetInfo target = engine.analyze_target(argv[2]);
+            auto results = engine.simulate_lfi(target, argv[2], argv[3]);
+            for (const auto& r : results) {
+                std::cout << "[" << (r.success ? "VULNERABLE" : "SAFE") << "] " << r.attack_type << std::endl;
+                std::cout << "  Payload: " << r.payload_used << std::endl;
+                std::cout << "  Confidence: " << r.confidence << "%" << std::endl;
+                std::cout << "  Evidence: " << r.evidence << std::endl;
+                std::cout << "  Recommendation: " << r.recommendation << std::endl;
+            }
+        }
+        else if (command == "bruteforce" && argc >= 3) {
+            netraven::TargetInfo target = engine.analyze_target(argv[2]);
+            std::string service = (argc >= 4) ? argv[3] : "http";
+            auto results = engine.simulate_bruteforce(target, service);
+            for (const auto& r : results) {
+                std::cout << "[" << (r.success ? "VULNERABLE" : "SAFE") << "] " << r.attack_type << std::endl;
+                std::cout << "  Payload: " << r.payload_used << std::endl;
+                std::cout << "  Confidence: " << r.confidence << "%" << std::endl;
+                std::cout << "  Evidence: " << r.evidence << std::endl;
+                std::cout << "  Recommendation: " << r.recommendation << std::endl;
+            }
+        }
+        else if (command == "open_redirect" && argc >= 4) {
+            netraven::TargetInfo target = engine.analyze_target(argv[2]);
+            auto results = engine.simulate_open_redirect(target, argv[2], argv[3]);
+            for (const auto& r : results) {
+                std::cout << "[" << (r.success ? "VULNERABLE" : "SAFE") << "] " << r.attack_type << std::endl;
+                std::cout << "  Payload: " << r.payload_used << std::endl;
+                std::cout << "  Confidence: " << r.confidence << "%" << std::endl;
+                std::cout << "  Evidence: " << r.evidence << std::endl;
+                std::cout << "  Recommendation: " << r.recommendation << std::endl;
+            }
+        }
+        else if (command == "csrf" && argc >= 3) {
+            netraven::TargetInfo target = engine.analyze_target(argv[2]);
+            auto results = engine.simulate_csrf(target, argv[2]);
+            for (const auto& r : results) {
+                std::cout << "[" << (r.success ? "VULNERABLE" : "SAFE") << "] " << r.attack_type << std::endl;
+                std::cout << "  Payload: " << r.payload_used << std::endl;
+                std::cout << "  Confidence: " << r.confidence << "%" << std::endl;
+                std::cout << "  Evidence: " << r.evidence << std::endl;
+                std::cout << "  Recommendation: " << r.recommendation << std::endl;
+            }
+        }
+        else if (command == "clickjacking" && argc >= 3) {
+            netraven::TargetInfo target = engine.analyze_target(argv[2]);
+            auto results = engine.simulate_clickjacking(target, argv[2]);
+            for (const auto& r : results) {
+                std::cout << "[" << (r.success ? "VULNERABLE" : "SAFE") << "] " << r.attack_type << std::endl;
+                std::cout << "  Payload: " << r.payload_used << std::endl;
+                std::cout << "  Confidence: " << r.confidence << "%" << std::endl;
+                std::cout << "  Evidence: " << r.evidence << std::endl;
+                std::cout << "  Recommendation: " << r.recommendation << std::endl;
+            }
+        }
+        else if (command == "crlf" && argc >= 4) {
+            netraven::TargetInfo target = engine.analyze_target(argv[2]);
+            auto results = engine.simulate_crlf(target, argv[2], argv[3]);
+            for (const auto& r : results) {
+                std::cout << "[" << (r.success ? "VULNERABLE" : "SAFE") << "] " << r.attack_type << std::endl;
+                std::cout << "  Payload: " << r.payload_used << std::endl;
+                std::cout << "  Confidence: " << r.confidence << "%" << std::endl;
+                std::cout << "  Evidence: " << r.evidence << std::endl;
+                std::cout << "  Recommendation: " << r.recommendation << std::endl;
+            }
+        }
+        else if (command == "plugin" && argc >= 3) {
+            std::string plugin_name = argv[2];
+            std::string target_url = (argc >= 4) ? argv[3] : "";
+            std::string result = engine.execute_plugin_attack(plugin_name, target_url);
+            std::cout << result << std::endl;
+        }
+        else if (command == "report" && argc >= 3) {
+            netraven::TargetInfo target = engine.analyze_target(argv[2]);
+            auto results = engine.simulate_sqli(target, argv[2], "id");
+            results.push_back(engine.simulate_xss(target, argv[2], "q")[0]);
+            results.push_back(engine.simulate_cmdi(target, argv[2], "cmd")[0]);
+            results.push_back(engine.simulate_lfi(target, argv[2], "file")[0]);
+            std::string report = engine.generate_report(target, results);
+            std::cout << report << std::endl;
+        }
+        else if (command == "score" && argc >= 3) {
+            netraven::TargetInfo target = engine.analyze_target(argv[2]);
+            double score = engine.calculate_exploitability_score(target);
+            std::cout << "Exploitability Score: " << std::fixed << std::setprecision(1) << score << "/100" << std::endl;
+        }
+        else {
+            std::cerr << "Unknown command or missing arguments: " << command << std::endl;
+            std::cerr << "Usage: netraven_engine <command> [args...]" << std::endl;
+            return 1;
+        }
+    } catch (const std::exception& e) {
+        std::cerr << "Error: " << e.what() << std::endl;
+        return 1;
+    }
+
+    return 0;
+}
