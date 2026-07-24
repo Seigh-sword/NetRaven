@@ -13,6 +13,17 @@ if [ ! -f "$ENGINE_DIR/Makefile" ]; then
     exit 1
 fi
 
+if ! dpkg -s libcurl4-openssl-dev &>/dev/null; then
+    echo -e "${YELLOW}[!] libcurl development headers not found. Installing...${NC}"
+    sudo apt update -qq 2>/dev/null || true
+    sudo apt install -y libcurl4-openssl-dev 2>&1 | tail -n 5
+fi
+
+if ! dpkg -s libcurl4-openssl-dev &>/dev/null; then
+    echo -e "${YELLOW}[!] libcurl4-openssl-dev not available, trying libcurl-dev...${NC}"
+    sudo apt install -y libcurl-dev 2>&1 | tail -n 5
+fi
+
 cd "$ENGINE_DIR"
 make clean 2>/dev/null || true
 make

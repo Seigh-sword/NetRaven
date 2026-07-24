@@ -51,7 +51,14 @@ show_status_bar() {
 auto_build_engine() {
     if [ ! -f "src/engine/netraven_engine" ]; then
         echo -e "${CYAN}[*] Building C++ Engine...${NC}"
-        sudo apt install -y -qq g++ make libcurl4-openssl-dev 2>/dev/null || true
+        echo -e "${YELLOW}[*] Installing build dependencies...${NC}"
+        sudo apt update -qq 2>/dev/null || true
+        sudo apt install -y g++ make libcurl4-openssl-dev 2>&1 | tail -n 5
+        if ! dpkg -s libcurl4-openssl-dev &>/dev/null; then
+            echo -e "${YELLOW}[!] libcurl4-openssl-dev not available, trying libcurl-dev...${NC}"
+            sudo apt install -y libcurl-dev 2>&1 | tail -n 5
+        fi
+        echo -e "${CYAN}[*] Compiling engine...${NC}"
         cd src/engine && make clean 2>/dev/null && make 2>&1 | tee /tmp/netraven_build.log
         cd ../..
         if [ -f "src/engine/netraven_engine" ]; then
