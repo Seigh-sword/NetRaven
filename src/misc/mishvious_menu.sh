@@ -71,6 +71,52 @@ view_terms() {
     fi
 }
 
+update_netraven() {
+    clear
+    echo -e "${CYAN}=== Update NetRaven ===${NC}"
+    echo
+    
+    if [ ! -d "$PROJECT_ROOT/.git" ]; then
+        echo -e "${RED}[!] Not a git repository. Cannot update.${NC}"
+        echo -e "${YELLOW}[*] Download latest from GitHub manually${NC}"
+        read -p "Press Enter to return..."
+        return
+    fi
+    
+    cd "$PROJECT_ROOT"
+    
+    echo -e "${YELLOW}[*] Checking for updates...${NC}"
+    git fetch origin 2>/dev/null
+    
+    LOCAL=$(git rev-parse @ 2>/dev/null)
+    REMOTE=$(git rev-parse @{u} 2>/dev/null)
+    
+    if [ "$LOCAL" = "$REMOTE" ]; then
+        echo -e "${GREEN}[+] NetRaven is already up to date!${NC}"
+        read -p "Press Enter to return..."
+        return
+    fi
+    
+    echo -e "${CYAN}[*] Updates available!${NC}"
+    echo -e "${YELLOW}[*] Changes:${NC}"
+    git log --oneline @{u}..HEAD 2>/dev/null || git log --oneline -5
+    
+    read -p "Update now? (yes/no): " confirm
+    if [ "$confirm" = "yes" ]; then
+        echo -e "${CYAN}[*] Updating NetRaven...${NC}"
+        git pull origin main 2>&1 | tail -n 10
+        
+        if [ $? -eq 0 ]; then
+            echo -e "${GREEN}[+] Update successful!${NC}"
+            echo -e "${YELLOW}[!] Restart NetRaven to use new version${NC}"
+        else
+            echo -e "${RED}[-] Update failed${NC}"
+        fi
+    fi
+    
+    read -p "Press Enter to return..."
+}
+
 mishvious_menu() {
     while true; do
         clear
@@ -86,6 +132,7 @@ mishvious_menu() {
         echo -e "${PURPLE}│${NC} ${CYAN}[7]${NC}  License                           ${PURPLE}│${NC}"
         echo -e "${PURPLE}│${NC} ${CYAN}[8]${NC}  Terms of Use                      ${PURPLE}│${NC}"
         echo -e "${PURPLE}│${NC} ${CYAN}[9]${NC}  Environment Information            ${PURPLE}│${NC}"
+        echo -e "${PURPLE}│${NC} ${CYAN}[10]${NC} Update NetRaven                     ${PURPLE}│${NC}"
         echo -e "${PURPLE}│${NC} ${CYAN}[0]${NC}  Back to Main Menu                 ${PURPLE}│${NC}"
         echo -e "${PURPLE}└──────────────────────────────────────────┘${NC}"
         echo
@@ -104,6 +151,7 @@ mishvious_menu() {
                 source src/core/config.sh
                 show_env_info
                 ;;
+            10) update_netraven ;;
             0) break ;;
             *) echo -e "${RED}[!] Invalid option${NC}" ;;
         esac

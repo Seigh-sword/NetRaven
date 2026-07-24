@@ -23,6 +23,7 @@ hack_menu() {
         echo -e "${PURPLE}│${NC} ${CYAN}[4]${NC}  Monitoring & Analysis              ${PURPLE}│${NC}"
         echo -e "${PURPLE}│${NC} ${CYAN}[5]${NC}  Network Utilities                  ${PURPLE}│${NC}"
         echo -e "${PURPLE}│${NC} ${CYAN}[6]${NC}  Reports                            ${PURPLE}│${NC}"
+        echo -e "${PURPLE}│${NC} ${CYAN}[7]${NC}  Exploitation                       ${PURPLE}│${NC}"
         echo -e "${PURPLE}│${NC} ${CYAN}[0]${NC}  Back to Main Menu                  ${PURPLE}│${NC}"
         echo -e "${PURPLE}└──────────────────────────────────────────┘${NC}"
         echo
@@ -35,6 +36,7 @@ hack_menu() {
             4) source src/modules/monitor_menu.sh ;;
             5) source src/modules/network_menu.sh ;;
             6) source src/modules/reports.sh ;;
+            7) source src/modules/exploit_menu.sh ;;
             0) break ;;
             *) echo -e "${RED}[!] Invalid option${NC}" ;;
         esac

@@ -74,6 +74,7 @@ show_help() {
     echo "  [4]  Monitoring        - Ping, HTTP uptime, port, DNS, SSL expiry"
     echo "  [5]  Network           - Traceroute, GeoIP, ASN, masscan, netcat"
     echo "  [6]  Reports           - Generate and export full assessment reports"
+    echo "  [7]  Exploitation      - SQLi dump/add admin/deface, CMDi shell, LFI RCE, XSS, upload shell"
     echo
     echo -e "${YELLOW}Mishvious Modules:${NC}"
     echo "  [1]  C++ Engine        - Attack simulation engine with plugin support"
@@ -85,6 +86,7 @@ show_help() {
     echo "  [7]  License           - Apache 2.0 license"
     echo "  [8]  Terms             - Terms of use"
     echo "  [9]  Environment Info  - Show system details, tools, and engine status"
+    echo "  [10] Update NetRaven   - Self-update from git repository"
     echo
     echo -e "${RED}[!] Only test systems you own or have explicit permission to test.${NC}"
     echo
